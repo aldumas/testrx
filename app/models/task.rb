@@ -1,14 +1,18 @@
 # frozen_string_literal: true
 
 class Task
-  def initialize
-    @complete = false
-  end
-  def complete?
-    @complete
+  attr_accessor :size, :completed
+
+  def initialize(options = {})
+    @completed = options[:completed]
+    @size = options[:size]
   end
 
   def mark_completed
-    @complete = true
+    @completed = true
+  end
+
+  def complete?
+    @completed
   end
 end

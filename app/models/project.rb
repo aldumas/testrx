@@ -1,12 +1,25 @@
 # frozen_string_literal: true
 
 class Project
-  attr_reader :tasks
+  attr_accessor :tasks
 
   def initialize
     @tasks = []
   end
+
+  def incomplete_tasks
+    tasks.reject(&:complete?)
+  end
+
   def done?
-    tasks.all?(&:complete?)
+    incomplete_tasks.empty?
+  end
+
+  def total_size
+    tasks.sum(&:size)
+  end
+
+  def remaining_size
+    incomplete_tasks.sum(&:size)
   end
 end
